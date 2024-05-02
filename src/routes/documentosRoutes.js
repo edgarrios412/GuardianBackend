@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getDocumentos, getDocumentoById, newDocumento, editDocumento, getDocumentoByUsuario} = require("../controllers/documentosController");
+const { getDocumentos, getDocumentoById, newDocumento, editDocumento, getDocumentoByUsuario, wordToPdf} = require("../controllers/documentosController");
 const { upload } = require("../helpers/multer");
 const documentosRoutes = Router();
 
@@ -34,6 +34,15 @@ documentosRoutes.post("/:tramite", upload.single("file"),async (req, res) => {
     const documento = await newDocumento(req.file,req.params.tramite,ip)
     var ip = req.headers;
     console.log(ip)
+    res.status(200).json(documento);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+});
+
+documentosRoutes.post("/convert/toPdf", upload.single("file"),async (req, res) => {
+  try {
+    const documento = await wordToPdf(req.file)
     res.status(200).json(documento);
   } catch (error) {
     res.status(400).json(error.message);
