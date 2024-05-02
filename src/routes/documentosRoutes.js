@@ -42,7 +42,9 @@ documentosRoutes.post("/:tramite", upload.single("file"),async (req, res) => {
 
 documentosRoutes.post("/convert/toPdf", upload.single("file"),async (req, res) => {
   try {
-    const documento = await wordToPdf(req.file)
+    console.log(req.body)
+    const documento = await wordToPdf(req.file.filename,req.body.tramiteId)
+    console.log(documento)
     res.status(200).json(documento);
   } catch (error) {
     res.status(400).json(error.message);

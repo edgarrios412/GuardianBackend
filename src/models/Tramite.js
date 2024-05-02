@@ -15,6 +15,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true
     },
+    documento:{
+      type: DataTypes.STRING,
+      allowNull:true,
+    },
     fechaActualizacion:{
       type: DataTypes.DATE,
       allowNull: true,

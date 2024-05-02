@@ -4,7 +4,7 @@ const indexRoutes = require("./routes/index")
 const path = require("node:path")
 const cors = require("cors")
 const morgan = require("morgan")
-
+app.use(cors())
 function guardarRegistro(usuario, archivo) {
     // Aquí va la lógica para guardar el registro en la base de datos
     console.log(`Usuario ${usuario} ha visto el archivo ${archivo}`);
@@ -26,7 +26,6 @@ app.use('/uploads', function(req, res, next) {
 app.set('trust proxy', true);
 app.use('/uploads', express.static('uploads'));
 app.use(express.json())
-app.use(cors())
 app.use(morgan("dev"))
 app.use("/", indexRoutes)
 
