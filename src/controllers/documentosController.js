@@ -26,6 +26,21 @@ module.exports = {
     });
     return documento;
   },
+  uploadFile: async (data, ip) => {
+    const documento = await Documentos.create({
+      size: (data.size / 1000000).toFixed(1),
+      file: data.originalname,
+      path: data.path,
+      fecha: new Date(),
+      tramiteId: null,
+    });
+    const auditoria = await Auditoria.create({
+      ip,
+      fecha: new Date(),
+      accion: "Se subió  un documento",
+    });
+    return documento;
+  },
   getDocumentos: async () => {
     const documentos = await Documentos.findAll();
     return documentos;

@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "mc": "nodemon src/mctest.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,17 +13,26 @@
   "description": "",
   "dependencies": {
     "@pdftron/pdfnet-node": "^10.8.0-1",
+    "asposepdfcloud": "^24.4.0",
     "axios": "^1.6.8",
+    "convert-multiple-files": "^1.2.5",
     "cors": "^2.8.5",
+    "docx-pdf": "^0.0.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "groupdocs-conversion-cloud": "^24.4.0",
+    "html-pdf": "^3.0.1",
     "jsonwebtoken": "^9.0.2",
     "libreoffice": "^0.4.5",
     "libreoffice-convert": "^1.5.1",
+    "mammoth": "^1.7.2",
+    "minecraft-data": "^3.65.0",
+    "minecraft-protocol": "^1.47.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.0",
     "pg": "^8.11.5",
+    "prismarine-nbt": "^2.5.0",
     "sequelize": "^6.37.3"
   }
 }
