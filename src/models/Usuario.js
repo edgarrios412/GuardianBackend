@@ -40,6 +40,11 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: true,
       defaultValue: () => new Date()
+    },
+    ban:{
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue:false
     }
   },{timestamps:false});
 };

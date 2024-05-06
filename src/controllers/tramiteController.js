@@ -6,7 +6,11 @@ module.exports = {
     return tramite;
   },
   getTramites: async () => {
-    const tramites = await Tramite.findAll();
+    const tramites = await Tramite.findAll({
+      include:[{
+        model: Usuario
+      }]
+    });
     return tramites;
   },
   getTramiteById: async (id) => {
