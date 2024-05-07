@@ -1,17 +1,34 @@
-const { Tramite, Usuario, Documentos, Historial } = require("../db");
+const { Tramite, Usuario, Documentos, Historial, Listatramites } = require("../db");
 
 module.exports = {
   newTramite: async (data) => {
-    const tramite = await Tramite.create(data);
+    const tramite = await Tramite.create({...data, listatramiteId:data.tramite});
     return tramite;
   },
   getTramites: async () => {
     const tramites = await Tramite.findAll({
       include:[{
         model: Usuario
+      },{
+        model:Listatramites
       }]
     });
     return tramites;
+  },
+  createListaTramites: async (data) => {
+    const tramites = await Listatramites.create(data);
+    return tramites;
+  },
+  getListaTramites: async () => {
+    const tramites = await Listatramites.findAll();
+    return tramites;
+  },
+  editListaTramites:async (id, nombre) => {
+    const tramite = await Listatramites.findByPk(id);
+    if(!tramite) throw new Error("El tramite no se ha encontrado")
+    tramite.nombre = nombre
+    await tramite.save()
+    return "Tramite editado con éxito";
   },
   getTramiteById: async (id) => {
     const tramite = await Tramite.findByPk(id, {
@@ -19,7 +36,9 @@ module.exports = {
         {
           model: Usuario,
         },
-      ],
+        {
+          model:Listatramites
+        }],
     });
     if (!tramite) throw new Error("El tramite ingresado no existe");
     return tramite;
@@ -31,6 +50,8 @@ module.exports = {
       include:[{
         model:Documentos
       },{
+        model:Listatramites
+      },{
         model:Historial,
         include: [
           {
@@ -38,7 +59,15 @@ module.exports = {
           }
         ]
       },{
-        model:Usuario
+        model:Usuario,
+        include: [
+          {
+            model: Tramite,
+            include:[{
+              model:Listatramites
+            }]
+          },
+        ]
       },]
     });
     if (!tramites) throw new Error("No hay ningún tramite en la base de datos");

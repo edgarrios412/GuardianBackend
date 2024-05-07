@@ -24,10 +24,6 @@ module.exports = (sequelize) => {
       allowNull: true,
       defaultValue: () => new Date()
     },
-    tramite:{
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     numeroRadicado:{
       type: DataTypes.STRING,
       allowNull: false,

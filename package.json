@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "mc": "nodemon src/mctest.js",
+    "mc": "nodemon src/mcsv.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -33,6 +33,8 @@
     "nodemon": "^3.1.0",
     "pg": "^8.11.5",
     "prismarine-nbt": "^2.5.0",
+    "rcon": "^1.1.0",
+    "rcon-client": "^4.2.4",
     "sequelize": "^6.37.3"
   }
 }

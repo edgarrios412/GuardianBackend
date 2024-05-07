@@ -30,7 +30,7 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Usuario, Tramite, Grupo, Documentos, Historial, Reporte} = sequelize.models;
+const { Usuario, Tramite, Grupo, Documentos, Historial, Reporte, Listatramites} = sequelize.models;
 
 Tramite.addHook('beforeCreate', async (tramite, options) => {
   // Obtén el último valor de numeroRadicado
@@ -50,6 +50,9 @@ Tramite.addHook('beforeCreate', async (tramite, options) => {
 
  Tramite.hasMany(Documentos);
  Documentos.belongsTo(Tramite);
+
+ Listatramites.hasMany(Tramite)
+ Tramite.belongsTo(Listatramites)
 
  Tramite.hasMany(Historial);
  Historial.belongsTo(Tramite);
