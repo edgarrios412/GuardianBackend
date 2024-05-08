@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { getTramites, getTramiteById, newTramite, editTramite, getTramiteByUsuario, getListaTramites, editListaTramites, createListaTramites} = require("../controllers/tramiteController");
+const { firmarDocumento } = require("../controllers/firmaController");
 const tramiteRoutes = Router();
 
 tramiteRoutes.get("/:id", async (req, res) => {
@@ -20,6 +21,15 @@ tramiteRoutes.get("/:id", async (req, res) => {
 tramiteRoutes.put("/listaTramite/editar/:id", async (req, res) => {
   try {
     const lista = await editListaTramites(req.params.id, req.body.nombre);
+    res.status(200).json(lista);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+});
+
+tramiteRoutes.post("/firmarDocumento", async (req, res) => {
+  try {
+    const lista = await firmarDocumento(req.body);
     res.status(200).json(lista);
   } catch (error) {
     res.status(400).json(error.message);
