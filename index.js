@@ -1,4 +1,3 @@
-const { default: axios } = require("axios");
 const app = require("./src/app")
 const {conn} = require("./src/db")
 const PORT = process.env.PORT || 3001;
