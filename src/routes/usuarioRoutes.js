@@ -54,7 +54,7 @@ usuarioRoutes.put("/:id", async (req, res) => {
   }
 });
 
-usuarioRoutes.put("/sistema/ver", async (req, res) => {
+usuarioRoutes.get("/sistema/ver", async (req, res) => {
   try {
     const usuario = await verSistema();
     res.status(200).json(usuario);
