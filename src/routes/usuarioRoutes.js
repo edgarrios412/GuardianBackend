@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getUsers, getUsersById, newUser, editUser, authUser, getUsersOrderByGroup } = require("../controllers/usuarioController");
+const { getUsers, getUsersById, newUser, editUser, authUser, getUsersOrderByGroup, verSistema } = require("../controllers/usuarioController");
 const usuarioRoutes = Router();
 
 usuarioRoutes.get("/:id", async (req, res) => {
@@ -48,6 +48,15 @@ usuarioRoutes.put("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const usuario = await editUser(req.body, id);
+    res.status(200).json(usuario);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+});
+
+usuarioRoutes.put("/sistema/ver", async (req, res) => {
+  try {
+    const usuario = await verSistema();
     res.status(200).json(usuario);
   } catch (error) {
     res.status(400).json(error.message);

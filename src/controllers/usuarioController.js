@@ -1,4 +1,4 @@
-const { Usuario, Grupo } = require("../db");
+const { Usuario, Grupo,System } = require("../db");
 
 module.exports = {
   newUser: async (data) => {
@@ -54,4 +54,8 @@ module.exports = {
     if (!usuario) throw new Error("El usuario ingresado no existe");
     return usuario;
   },
+  verSistema: async() => {
+    const system = await System.findByPk(1)
+    return system
+  }
 };
