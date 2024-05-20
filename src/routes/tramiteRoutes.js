@@ -3,12 +3,12 @@ const { getTramites, getTramiteById, newTramite, editTramite, getTramiteByUsuari
 const { firmarDocumento } = require("../controllers/firmaController");
 const tramiteRoutes = Router();
 
-tramiteRoutes.get("/:id", async (req, res) => {
-  const { id } = req.params;
+tramiteRoutes.get("/:companyId/:id", async (req, res) => {
+  const { id, companyId } = req.params;
   try {
     let tramite;
     if (id == "all") {
-      tramite = await getTramites();
+      tramite = await getTramites(companyId);
     } else {
       tramite = await getTramiteById(id);
     }
@@ -45,9 +45,9 @@ tramiteRoutes.post("/listaTramite/crear", async (req, res) => {
   }
 });
 
-tramiteRoutes.get("/listaTramites/listar", async (req, res) => {
+tramiteRoutes.get("/listaTramites/listar/:companyId", async (req, res) => {
   try {
-    const lista = await getListaTramites();
+    const lista = await getListaTramites(req.params.companyId);
     res.status(200).json(lista);
   } catch (error) {
     res.status(400).json(error.message);

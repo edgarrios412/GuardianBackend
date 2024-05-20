@@ -1,8 +1,12 @@
 const { Auditoria } = require("../db");
 
 module.exports = {
-  getAuditorias: async () => {
-    const auditorias = await Auditoria.findAll();
+  getAuditorias: async (companyId) => {
+    const auditorias = await Auditoria.findAll({
+      where:{
+        companyId:companyId
+      }
+    });
     return auditorias;
   },
   getAuditoriaById: async (id) => {

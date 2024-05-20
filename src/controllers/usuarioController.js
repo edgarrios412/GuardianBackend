@@ -5,8 +5,11 @@ module.exports = {
     const usuario = await Usuario.create(data);
     return usuario;
   },
-  getUsers: async () => {
+  getUsers: async (companyId) => {
     const usuarios = await Usuario.findAll({
+      where:{
+        companyId:companyId
+      },
       include:[{
         model:Grupo
       }]
@@ -18,8 +21,11 @@ module.exports = {
     if (!usuario) throw new Error("El usuario ingresado no existe");
     return usuario;
   },
-  getUsersOrderByGroup: async () => {
+  getUsersOrderByGroup: async (companyId) => {
     const usuarios = await Usuario.findAll({
+      where:{
+        companyId:companyId
+      },
       include:[{
         model:Grupo
       }]

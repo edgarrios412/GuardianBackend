@@ -30,7 +30,7 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Usuario, Tramite, Grupo, Documentos, Historial, Reporte, Listatramites} = sequelize.models;
+const { Usuario, Tramite, Grupo, Documentos, Historial, Reporte, Listatramites, Company, Plantilla} = sequelize.models;
 
 Tramite.addHook('beforeCreate', async (tramite, options) => {
   // Obtén el último valor de numeroRadicado
@@ -63,8 +63,26 @@ Tramite.addHook('beforeCreate', async (tramite, options) => {
  Usuario.hasMany(Tramite);
  Tramite.belongsTo(Usuario);
 
+ Company.hasMany(Usuario);
+ Usuario.belongsTo(Company);
+
  Usuario.hasMany(Reporte);
  Reporte.belongsTo(Usuario);
+
+ Company.hasMany(Documentos)
+ Documentos.belongsTo(Company)
+
+ Company.hasMany(Tramite)
+ Tramite.belongsTo(Company)
+
+ Company.hasMany(Grupo)
+ Grupo.belongsTo(Company)
+
+ Company.hasMany(Plantilla)
+ Plantilla.belongsTo(Company)
+
+ Company.hasMany(Listatramites)
+ Listatramites.belongsTo(Company)
 
   module.exports = {
     ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

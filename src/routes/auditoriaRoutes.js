@@ -3,12 +3,12 @@ const { getAuditoriaById, getAuditorias } = require("../controllers/auditoriaCon
 // const { getDocumentos, getDocumentoById, newDocumento, editDocumento, getDocumentoByUsuario} = require("../controllers/documentosController");
 const auditoriaRoutes = Router();
 
-auditoriaRoutes.get("/:id", async (req, res) => {
-  const { id } = req.params;
+auditoriaRoutes.get("/:id/:companyId", async (req, res) => {
+  const { id, companyId } = req.params;
   try {
     let auditorias;
     if (id == "all") {
-      auditorias = await getAuditorias();
+      auditorias = await getAuditorias(companyId);
     } else {
       auditorias = await getAuditoriaById(id);
     }

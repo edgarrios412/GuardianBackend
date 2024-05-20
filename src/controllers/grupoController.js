@@ -1,8 +1,11 @@
 const { Grupo, Usuario } = require("../db");
 
 module.exports = {
-  getGrupos: async () => {
+  getGrupos: async (companyId) => {
     const reportes = await Grupo.findAll({
+      where:{
+        companyId:companyId
+      },
       include:[{
         model:Usuario
       }]

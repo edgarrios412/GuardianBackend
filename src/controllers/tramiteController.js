@@ -5,8 +5,11 @@ module.exports = {
     const tramite = await Tramite.create({...data, listatramiteId:data.tramite});
     return tramite;
   },
-  getTramites: async () => {
+  getTramites: async (companyId) => {
     const tramites = await Tramite.findAll({
+      where:{
+        companyId:companyId
+      },
       include:[{
         model: Usuario
       },{
@@ -19,8 +22,12 @@ module.exports = {
     const tramites = await Listatramites.create(data);
     return tramites;
   },
-  getListaTramites: async () => {
-    const tramites = await Listatramites.findAll();
+  getListaTramites: async (companyId) => {
+    const tramites = await Listatramites.findAll({
+      where:{
+        companyId:companyId
+      }
+    });
     return tramites;
   },
   editListaTramites:async (id, nombre) => {

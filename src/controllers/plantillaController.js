@@ -1,8 +1,12 @@
 const { Plantilla } = require("../db");
 
 module.exports = {
-  getPlantillas: async () => {
-    const plantilla = await Plantilla.findAll();
+  getPlantillas: async (companyId) => {
+    const plantilla = await Plantilla.findAll({
+      where:{
+        companyId:companyId
+      }
+    });
     return plantilla;
   },
   guardarPlantilla: async (data) => {

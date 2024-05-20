@@ -2,9 +2,9 @@ const { Router } = require("express");
 const { getPlantillas, guardarPlantilla } = require("../controllers/plantillaController");
 const plantillaRoutes = Router();
 
-plantillaRoutes.get("/", async (req, res) => {
+plantillaRoutes.get("/:companyId", async (req, res) => {
   try {
-    const reportes = await getPlantillas();
+    const reportes = await getPlantillas(req.params.companyId);
     res.status(200).json(reportes);
   } catch (error) {
     res.status(400).json(error.message);

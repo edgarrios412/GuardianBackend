@@ -11,16 +11,18 @@ PDFNet.runWithCleanup(() => {},
 "demo:1714514682428:7fff3847030000000086d2920c9fcfbfd42e8e5e2f9b40c56789aa3359");
 
 module.exports = {
-  newDocumento: async (data, tramite, ip) => {
+  newDocumento: async (data, tramite, ip, companyId) => {
     const documento = await Documentos.create({
       size: (data.size / 1000000).toFixed(1),
       file: data.originalname,
       path: data.path,
       fecha: new Date(),
       tramiteId: tramite,
+      companyId: companyId
     });
     const auditoria = await Auditoria.create({
       ip,
+      companyId:companyId,
       fecha: new Date(),
       accion: "Se subió  un documento",
     });
@@ -33,9 +35,11 @@ module.exports = {
       path: data.path,
       fecha: new Date(),
       tramiteId: null,
+      companyId: companyId
     });
     const auditoria = await Auditoria.create({
       ip,
+      companyId:companyId,
       fecha: new Date(),
       accion: "Se subió  un documento",
     });
