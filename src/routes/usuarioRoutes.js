@@ -26,9 +26,9 @@ usuarioRoutes.get("/byCompany/:companyId", async (req, res) => {
   }
 });
 
-usuarioRoutes.get("/order/byGroup", async (req, res) => {
+usuarioRoutes.get("/order/byGroup/:companyId", async (req, res) => {
   try {
-    const usuario = await getUsersOrderByGroup();
+    const usuario = await getUsersOrderByGroup(req.params.companyId);
     res.status(200).json(usuario);
   } catch (error) {
     res.status(400).json(error.message);

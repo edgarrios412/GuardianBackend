@@ -1,10 +1,13 @@
 const { Reporte, Usuario } = require("../db");
 
 module.exports = {
-  getReportes: async (id) => {
+  getReportes: async (id, companyId) => {
     let reportes;
     if (id == "all") {
       reportes = await Reporte.findAll({
+        where:{
+          companyId:companyId
+        },
         include: [
           {
             model: Usuario,
@@ -13,6 +16,9 @@ module.exports = {
       });
     } else {
       reportes = await Reporte.findByPk(id, {
+        where:{
+            companyId:companyId
+        },
         include: [
           {
             model: Usuario,

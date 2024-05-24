@@ -34,12 +34,10 @@ module.exports = {
       file: data.originalname,
       path: data.path,
       fecha: new Date(),
-      tramiteId: null,
-      companyId: companyId
+      tramiteId: null
     });
     const auditoria = await Auditoria.create({
       ip,
-      companyId:companyId,
       fecha: new Date(),
       accion: "Se subió  un documento",
     });

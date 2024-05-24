@@ -3,7 +3,7 @@ const { getTramites, getTramiteById, newTramite, editTramite, getTramiteByUsuari
 const { firmarDocumento } = require("../controllers/firmaController");
 const tramiteRoutes = Router();
 
-tramiteRoutes.get("/:companyId/:id", async (req, res) => {
+tramiteRoutes.get("/company/:companyId/:id", async (req, res) => {
   const { id, companyId } = req.params;
   try {
     let tramite;

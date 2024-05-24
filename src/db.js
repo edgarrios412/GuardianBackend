@@ -66,6 +66,9 @@ Tramite.addHook('beforeCreate', async (tramite, options) => {
  Company.hasMany(Usuario);
  Usuario.belongsTo(Company);
 
+ Company.hasMany(Reporte);
+ Reporte.belongsTo(Company);
+
  Usuario.hasMany(Reporte);
  Reporte.belongsTo(Usuario);
 

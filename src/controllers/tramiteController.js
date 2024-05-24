@@ -54,6 +54,9 @@ module.exports = {
     const usuario = await Usuario.findByPk(id)
     if (!usuario) throw new Error("El usuario ingresado no existe");
     const tramites = await Tramite.findAll({
+      where:{
+        companyId: usuario.companyId
+      },
       include:[{
         model:Documentos
       },{
@@ -79,6 +82,7 @@ module.exports = {
     });
     if (!tramites) throw new Error("No hay ningún tramite en la base de datos");
     if(usuario.rol == 1){
+      console.log(tramites)
       const tramitesFiltrados = tramites.filter(t => t.grupoGestion == usuario.grupoId && t.estado == 1)
       return tramitesFiltrados;
     }else{

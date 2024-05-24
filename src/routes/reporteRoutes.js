@@ -2,10 +2,10 @@ const { Router } = require("express");
 const { getReportes, createReporte } = require("../controllers/reporteController");
 const reporteRoutes = Router();
 
-reporteRoutes.get("/:id", async (req, res) => {
-  const { id } = req.params;
+reporteRoutes.get("/:companyId/:id", async (req, res) => {
+  const { id, companyId } = req.params;
   try {
-    const reportes = await getReportes(id);
+    const reportes = await getReportes(id, companyId);
     res.status(200).json(reportes);
   } catch (error) {
     res.status(400).json(error.message);
